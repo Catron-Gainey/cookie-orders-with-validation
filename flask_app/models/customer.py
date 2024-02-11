@@ -7,7 +7,6 @@ import re
 # bcrypt = Bcrypt(app)
 # The above is used when we do login registration, flask-bcrypt should already be in your env check the pipfile
 
-# Remember 'fat models, skinny controllers' more logic should go in here rather than in your controller. Your controller should be able to just call a function from the model for what it needs, ideally.
 class Customer:
     db = "cookies" #which database are you using for this project
     def __init__(self, data):
@@ -17,8 +16,6 @@ class Customer:
         self.number_of_boxes = data['number_of_boxes']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-        # What changes need to be made above for this project?
-        #What needs to be added here for class association?
 
 
 
@@ -34,11 +31,11 @@ class Customer:
     @classmethod
     def get_all_customers_orders(cls):
         query = "SELECT * FROM customers;"
-        # make sure to call the connectToMySQL function with the schema you are targeting.
+        # call the connectToMySQL function with the schema you are targeting.
         results = connectToMySQL('cookies').query_db(query)
-        # Create an empty list to append our instances of friends
+        # Create an empty list to append our instances 
         orders = []
-        # Iterate over the db results and create instances of friends with cls.
+        # Iterate over the db results and create instances with cls.
         for order in results:
             orders.append(cls(order))
         return orders
@@ -72,6 +69,3 @@ class Customer:
             flash("number of boxes cant be negative.")
             is_valid = False
         return is_valid
-
-
-    # Delete Users Models
